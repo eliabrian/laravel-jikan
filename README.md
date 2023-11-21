@@ -1,0 +1,1 @@
+# Laravel Package for Jikan API v4
