@@ -3,7 +3,8 @@
     "description": "Laravel Package for Jikan API",
     "type": "library",
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "7.9.x-dev"
     },
     "require-dev": {
         "orchestra/testbench": "dev-develop"
@@ -14,11 +15,19 @@
             "Eliabrian\\LaravelJikan\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Eliabrian\\LaravelJikan\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Eliabrian\\LaravelJikan\\LaravelJikanServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Anime": "Eliabrian\\LaravelJikan\\Facades\\Anime"
+            }
         }
     },
     "authors": [

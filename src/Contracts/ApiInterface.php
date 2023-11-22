@@ -2,9 +2,7 @@
 
 namespace Eliabrian\LaravelJikan\Contracts;
 
-use Illuminate\Support\Collection;
-
-interface JikanContract
+interface ApiInterface
 {
     /**
      * Set ID.
@@ -27,7 +25,7 @@ interface JikanContract
     /**
      * Get the result.
      * 
-     * @return Collection
+     * @return array
      */
-    public function get(): Collection;
+    public function get(): array;
 }

@@ -2,6 +2,7 @@
 
 namespace Eliabrian\LaravelJikan;
 
+use Eliabrian\LaravelJikan\Jikan\Anime;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelJikanServiceProvider extends ServiceProvider
@@ -13,6 +14,8 @@ class LaravelJikanServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        //
+        $this->app->singleton('anime', function ($app) {
+            return new Anime();
+        });
     }
 }
