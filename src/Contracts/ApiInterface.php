@@ -23,6 +23,15 @@ interface ApiInterface
     public function type(string $type): self;
 
     /**
+     * Set search.
+     * 
+     * @param array $params
+     * 
+     * @return self
+     */
+    public function search(array $params): self;
+
+    /**
      * Get the result.
      * 
      * @return array
