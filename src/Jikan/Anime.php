@@ -4,7 +4,6 @@ namespace Eliabrian\LaravelJikan\Jikan;
 
 use Eliabrian\LaravelJikan\Contracts\ApiInterface;
 use Exception;
-use Illuminate\Support\Collection;
 
 class Anime extends Jikan implements ApiInterface
 {
@@ -58,6 +57,6 @@ class Anime extends Jikan implements ApiInterface
             uri: 'anime'
         );
         
-        return $this->response;
+        return $response;
     }
 }

@@ -26,7 +26,8 @@
                 "Eliabrian\\LaravelJikan\\LaravelJikanServiceProvider"
             ],
             "aliases": {
-                "Anime": "Eliabrian\\LaravelJikan\\Facades\\Anime"
+                "Anime": "Eliabrian\\LaravelJikan\\Facades\\Anime",
+                "Manga": "Eliabrian\\LaravelJikan\\Facades\\Manga"
             }
         }
     },

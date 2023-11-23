@@ -24,8 +24,8 @@ final class AnimeTest extends TestCase
         $params = [
             'q' => 'Demon Slayer',
             'type' => 'tv',
-            'sfw' => 'true',
-            'limit' => 2,
+            'sfw' => true,
+            'limit' => 1,
         ];
 
         $anime = Anime::search($params)->get();
