@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 
 class Anime extends Jikan implements ApiInterface
 {
-
     public const ANIME_CHARACTERS = "characters";
     public const ANIME_EPISODES = "episodes";
     public const ANIME_NEWS = "news";
@@ -17,26 +16,6 @@ class Anime extends Jikan implements ApiInterface
     public const ANIME_RELATIONS = "relations";
     public const ANIME_STAFF = "staff";
     public const ANIME_VIDEOS = "videos";
-    
-    /**
-     * @var int $id
-     */
-    protected int $id;
-
-    /**
-     * @var string $type
-     */
-    protected string $type;
-
-    /**
-     * @var array $params
-     */
-    protected array $params = [];
-
-    /**
-     * @var array
-     */
-    protected array $response;
 
     public function id(int $id): self
     {
@@ -74,21 +53,10 @@ class Anime extends Jikan implements ApiInterface
 
     public function get(): array
     {
-        if (!empty($this->id)) {
-            $this->response = $this->callWithId(
-                method: 'GET',
-                parameters: [],
-                type: $this->type ?? '',
-                uri: 'anime',
-                id: $this->id
-            );
-        } else {
-            $this->response = $this->call(
-                method: 'GET',
-                parameters: $this->params,
-                uri: 'anime'
-            );
-        }
+        $response = $this->call(
+            method: 'GET',
+            uri: 'anime'
+        );
         
         return $this->response;
     }

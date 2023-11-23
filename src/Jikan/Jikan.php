@@ -11,55 +11,59 @@ class Jikan
     public const API_VERSION_JIKAN = 'v4';
 
     /**
-     * Call Jikan API with ID.
-     * 
-     * @param string $method
-     * @param ?array $parameters
-     * @param string $uri
-     * @param ?string $type
-     * @param int $id
-     * 
-     * @return mixed
+     * @var int $id
      */
-    protected function callWithId(string $method, ?array $parameters = [], string $uri, ?string $type, int $id): mixed
-    {
-        switch ($method) {
-            default:
-            case 'GET':
-                $params = [
-                    'endpoint' => self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN,
-                    'version' => self::API_VERSION_JIKAN,
-                    'uri' => $uri,
-                    'type' => $type,
-                    'id' => $id,
-                ];
-
-                $response = Http::withUrlParameters($params)->get('{+endpoint}/{version}/{uri}/{id}/{type}');
-                break;
-        }
-
-        return $response->json();
-    }
+    protected int $id;
 
     /**
-     * Call JIkan API without ID.
+     * @var string $type
+     */
+    protected string $type;
+
+    /**
+     * @var array $queryParameters
+     */
+    protected array $queryParameters = [];
+
+    /**
+     * @var array
+     */
+    protected array $response;
+
+    /**
+     * Call JIkan API.
      * 
      * @param string $method
-     * @param array $parameters
      * @param string $uri
      * 
      * @return mixed
      */
-    protected function call(string $method, array $parameters = [], string $uri): mixed
+    protected function call(string $method, string $uri): mixed
     {
         switch ($method) {
             default:
             case 'GET':
-                $response = Http::get(self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN . '/'
-                    . self::API_VERSION_JIKAN . '/' . $uri,  $parameters);
-                break;
+                if (empty($this->id)) {
+                    $this->response = Http::get(
+                        url: self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN . '/' . self::API_VERSION_JIKAN . '/' . $uri, 
+                        query: $this->queryParameters)
+                        ->json();
+                    break;
+                } else {
+                    $parameters = [
+                        'endpoint' => self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN,
+                        'version' => self::API_VERSION_JIKAN,
+                        'uri' => $uri,
+                        'type' => $this->type ?? '',
+                        'id' => $this->id,
+                    ];
+    
+                    $this->response = Http::withUrlParameters(parameters: $parameters)
+                        ->get('{+endpoint}/{version}/{uri}/{id}/{type}')
+                        ->json();
+                }
         }
 
-        return $response->json();
+        return $this->response;
     }
 }
