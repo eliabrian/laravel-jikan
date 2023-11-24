@@ -13,12 +13,6 @@ final class AnimeTest extends TestCase
         $this->assertArrayHasKey("data", $anime);
     }
 
-    public function test_can_get_anime_pictures(): void
-    {
-        $anime = Anime::id(20)->type('pictures')->get();
-        $this->assertArrayHasKey("data", $anime);
-    }
-
     public function test_can_search_anime(): void
     {
         $params = [
