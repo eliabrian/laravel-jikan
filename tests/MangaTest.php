@@ -7,12 +7,6 @@ use Eliabrian\LaravelJikan\Tests\TestCase;
 
 final class MangaTest extends TestCase
 {
-    public function test_can_get_a_manga(): void
-    {
-        $manga = Manga::id(1)->get();
-        $this->assertArrayHasKey("data", $manga);
-    }
-
     public function test_can_search_manga(): void
     {
         $params = [

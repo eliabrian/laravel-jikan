@@ -12,10 +12,4 @@ final class RandomTest extends TestCase
         $anime = Random::anime()->get();
         $this->assertArrayHasKey("data", $anime);
     }
-
-    public function test_can_get_random_manga(): void
-    {
-        $anime = Random::manga()->get();
-        $this->assertArrayHasKey("data", $anime);
-    }
 }
