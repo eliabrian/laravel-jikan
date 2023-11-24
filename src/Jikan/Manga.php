@@ -64,4 +64,14 @@ class Manga extends Jikan implements ApiInterface
         
         return $response;
     }
+
+    public function random(): array
+    {
+        $response = $this->call(urlParameters: [
+            'random' => 'random',
+            'anime' => 'manga'
+        ]);
+
+        return $response;
+    }
 }
