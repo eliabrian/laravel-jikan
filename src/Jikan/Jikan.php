@@ -38,32 +38,35 @@ class Jikan
      * 
      * @return mixed
      */
-    protected function call(string $method, string $uri): mixed
+    protected function call(string $method = "GET", array $urlParameters = [], array $queryParameters = []): mixed
     {
         switch ($method) {
             default:
             case 'GET':
-                if (empty($this->id)) {
-                    $this->response = Http::get(
-                        url: self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN . '/' . self::API_VERSION_JIKAN . '/' . $uri, 
-                        query: $this->queryParameters)
-                        ->json();
-                    break;
-                } else {
-                    $parameters = [
-                        'endpoint' => self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN,
-                        'version' => self::API_VERSION_JIKAN,
-                        'uri' => $uri,
-                        'type' => $this->type ?? '',
-                        'id' => $this->id,
-                    ];
-    
-                    $this->response = Http::withUrlParameters(parameters: $parameters)
-                        ->get('{+endpoint}/{version}/{uri}/{id}/{type}')
-                        ->json();
-                }
+                return $this->response = $this->buildUrl(urlParameters: $urlParameters, queryParameters: $queryParameters)->json();
+                break;
+        }
+    }
+
+    private function buildUrl(array $urlParameters = [], array $queryParameters = []): object
+    {
+        if (isset($this->id) || isset($this->type)) {
+            $urlParameters['id'] = $this->id;
+            $urlParameters['type'] = $this->type ?? '';
         }
 
-        return $this->response;
+        $parameters = array_merge([
+            'domain' => self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN,
+            'version' => self::API_VERSION_JIKAN,
+        ], $urlParameters);
+        
+        $urlFormat = "{+domain}/{version}/";
+
+        foreach ($urlParameters as $key => $value) {
+            $urlFormat .= "{" . $key . "}/";
+        }
+
+        return Http::withUrlParameters(parameters: $parameters)
+            ->get(url: $urlFormat, query: $queryParameters);
     }
 }

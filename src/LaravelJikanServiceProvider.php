@@ -16,11 +16,11 @@ class LaravelJikanServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->singleton('anime', function (Application $app) {
+        $this->app->bind('anime', function (Application $app) {
             return new Anime();
         });
 
-        $this->app->singleton('manga', function (Application $app) {
+        $this->app->bind('manga', function (Application $app) {
             return new Manga;
         });
     }

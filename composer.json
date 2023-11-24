@@ -1,6 +1,11 @@
 {
     "name": "eliabrian/laravel-jikan",
     "description": "Laravel Package for Jikan API",
+    "keywords": [
+        "laravel",
+        "jikan",
+        "anime"
+    ],
     "type": "library",
     "require": {
         "php": "^8.2",
@@ -36,5 +41,8 @@
             "name": "Elia Brian Baskoro"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    }
 }

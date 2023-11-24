@@ -15,6 +15,14 @@ class Anime extends Jikan implements ApiInterface
     public const ANIME_RELATIONS = "relations";
     public const ANIME_STAFF = "staff";
     public const ANIME_VIDEOS = "videos";
+    public const ANIME_FORUM = "forum";
+    public const ANIME_STATISTICS = "statistics";
+    public const ANIME_MORE_INFO = "moreinfo";
+    public const ANIME_USER_UPDATES = "userupdates";
+    public const ANIME_REVIEWS = "reviews";
+    public const ANIME_THEMES = "themes";
+    public const ANIME_EXTERNAL = "external";
+    public const ANIME_STREAMING = "streaming";
 
     public function id(int $id): self
     {
@@ -34,6 +42,14 @@ class Anime extends Jikan implements ApiInterface
             self::ANIME_RELATIONS,
             self::ANIME_STAFF,
             self::ANIME_VIDEOS,
+            self::ANIME_FORUM,
+            self::ANIME_STATISTICS,
+            self::ANIME_MORE_INFO,
+            self::ANIME_USER_UPDATES,
+            self::ANIME_REVIEWS,
+            self::ANIME_THEMES,
+            self::ANIME_EXTERNAL,
+            self::ANIME_STREAMING,
         ])) {
             throw new Exception('Invalid anime detail type: ' . $type);
         }
@@ -53,10 +69,20 @@ class Anime extends Jikan implements ApiInterface
     public function get(): array
     {
         $response = $this->call(
-            method: 'GET',
-            uri: 'anime'
+            urlParameters: ['anime' => 'anime'],
+            queryParameters: $this->params ?? []
         );
         
+        return $response;
+    }
+
+    public function random(): array
+    {
+        $response = $this->call(urlParameters: [
+            'random' => 'random',
+            'anime' => 'anime'
+        ]);
+
         return $response;
     }
 }

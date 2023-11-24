@@ -16,7 +16,7 @@ final class MangaTest extends TestCase
     public function test_can_get_manga_characters(): void
     {
         $manga = Manga::id(1)->type('characters')->get();
-        $this->assertArrayHasKey('data', $manga);
+        $this->assertArrayHasKey("data", $manga);
     }
 
     public function test_can_search_manga(): void
