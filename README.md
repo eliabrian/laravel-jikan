@@ -5,12 +5,9 @@ A Laravel Package for consuming [Jikan](https://jikan.moe/) API (currently v4).
 
 ## Installation
 
-Install it using
 
 ```
-
 composer require eliabrian/laravel-jikan
-
 ```
 
 ## Usage
@@ -31,9 +28,11 @@ use Eliabrian\LaravelJikan\Facades\Anime;
 $animeCharacters = Anime::id(20)->type('characters')->get();
 $animePictures = Anime::id(20)->type('pictures')->get();
 ```
-### Get Random
+> **_NOTE:_** Type for different model might be differ. For more types you can look it up in [Jikan Docs](https://docs.api.jikan.moe/).
+### Get random
 ```php
-use Eliabrian\LaravelJikan\Facades\Anime;
+use Eliabrian\LaravelJikan\Facades\Random;
 
-$randomAnimes = Anime::random()->get();
+$randomAnimes = Random::anime()->get();
+$randomAnimes = Random::manga()->get();
 ```

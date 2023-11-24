@@ -2,6 +2,7 @@
 
 namespace Eliabrian\LaravelJikan;
 
+use Eliabrian\LaravelJikan\Jikan\Random;
 use Eliabrian\LaravelJikan\Jikan\Anime;
 use Eliabrian\LaravelJikan\Jikan\Manga;
 use Illuminate\Contracts\Foundation\Application;
@@ -22,6 +23,10 @@ class LaravelJikanServiceProvider extends ServiceProvider
 
         $this->app->bind('manga', function (Application $app) {
             return new Manga;
+        });
+
+        $this->app->bind('random', function (Application $app) {
+            return new Random;
         });
     }
 }

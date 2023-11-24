@@ -24,9 +24,14 @@ class Anime extends Jikan implements ApiInterface
     public const ANIME_EXTERNAL = "external";
     public const ANIME_STREAMING = "streaming";
 
+    /**
+     * @var string $uri
+     */
+    public $uri = 'anime';
+
     public function id(int $id): self
     {
-        $this->id = $id;
+        $this->urlParameters['id'] = $id;
 
         return $this;
     }
@@ -54,35 +59,28 @@ class Anime extends Jikan implements ApiInterface
             throw new Exception('Invalid anime detail type: ' . $type);
         }
 
-        $this->type = $type;
+        $this->urlParameters['type'] = $type;
 
         return $this;
     }
 
-    public function search(array $params): self
+    public function search(array $queryParameters): self
     {
-        $this->params = $params;
+        $this->queryParameters = $queryParameters;
+
+        return $this;
+    }
+
+    public function random(): self
+    {
+        $this->urlParameters['random'] = 'random';
 
         return $this;
     }
 
     public function get(): array
     {
-        $response = $this->call(
-            urlParameters: ['anime' => 'anime'],
-            queryParameters: $this->params ?? []
-        );
-        
-        return $response;
+        return $this->call();
     }
 
-    public function random(): array
-    {
-        $response = $this->call(urlParameters: [
-            'random' => 'random',
-            'anime' => 'anime'
-        ]);
-
-        return $response;
-    }
 }

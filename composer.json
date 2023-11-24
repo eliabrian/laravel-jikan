@@ -32,7 +32,8 @@
             ],
             "aliases": {
                 "Anime": "Eliabrian\\LaravelJikan\\Facades\\Anime",
-                "Manga": "Eliabrian\\LaravelJikan\\Facades\\Manga"
+                "Manga": "Eliabrian\\LaravelJikan\\Facades\\Manga",
+                "Random": "Eliabrian\\LaravelJikan\\Facades\\Random"
             }
         }
     },

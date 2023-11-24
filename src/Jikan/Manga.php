@@ -19,6 +19,11 @@ class Manga extends Jikan implements ApiInterface
     public const MANGA_RECOMMENDATIONS = "recommendations";
     public const MANGA_RELATIONS = "relations";
 
+    /**
+     * @var string $uri
+     */
+    public $uri = 'manga';
+
     public function id(int $id): self
     {
         $this->id = $id;
@@ -48,30 +53,17 @@ class Manga extends Jikan implements ApiInterface
         return $this;
     }
 
-    public function search(array $params): self
+    public function search(array $queryParameters): self
     {
-        $this->params = $params;
+        $this->queryParameters = $queryParameters;
 
         return $this;
     }
 
     public function get(): array
     {
-        $response = $this->call(
-            urlParameters: ['manga' => 'manga'],
-            queryParameters: $this->params ?? []
-        );
+        $response = $this->call();
         
-        return $response;
-    }
-
-    public function random(): array
-    {
-        $response = $this->call(urlParameters: [
-            'random' => 'random',
-            'anime' => 'manga'
-        ]);
-
         return $response;
     }
 }
