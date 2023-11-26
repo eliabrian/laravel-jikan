@@ -73,7 +73,17 @@ class Anime extends Jikan implements ApiInterface
 
     public function random(): self
     {
-        $this->urlParameters['random'] = 'random';
+        $this->urlParameters['anime'] = 'anime';
+        $this->uri = 'random';
+
+        return $this;
+    }
+
+    public function top(array $queryParameters = []): self
+    {
+        $this->urlParameters['anime'] = 'anime';
+        $this->uri = 'top';
+        $this->queryParameters = $queryParameters;
 
         return $this;
     }

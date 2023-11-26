@@ -48,22 +48,22 @@ class Jikan
         switch ($method) {
             default:
             case 'GET':
-                return $this->response = $this->buildUrl(urlParameters: $this->urlParameters)->json();
+                return $this->response = $this->buildUrl()->json();
                 break;
         }
     }
 
-    private function buildUrl(array $urlParameters = []): object
+    private function buildUrl(): object
     {
         $parameters = array_merge([
             'domain' => self::PROTOCOL_JIKAN . "://" . self::API_URL_JIKAN,
             'version' => self::API_VERSION_JIKAN,
             'uri' => $this->uri,
-        ], $urlParameters);
+        ], $this->urlParameters);
         
         $urlFormat = "{+domain}/{version}/{uri}/";
 
-        foreach ($urlParameters as $key => $value) {
+        foreach ($this->urlParameters as $key => $value) {
             $urlFormat .= "{" . $key . "}/";
         }
 

@@ -60,6 +60,23 @@ class Manga extends Jikan implements ApiInterface
         return $this;
     }
 
+    public function random(): self
+    {
+        $this->urlParameters['manga'] = 'manga';
+        $this->uri = 'random';
+
+        return $this;
+    }
+
+    public function top(array $queryParameters = []): self
+    {
+        $this->urlParameters['manga'] = 'manga';
+        $this->uri = 'top';
+        $this->queryParameters = $queryParameters;
+
+        return $this;
+    }
+
     public function get(): array
     {
         $response = $this->call();

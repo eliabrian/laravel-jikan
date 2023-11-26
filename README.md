@@ -14,6 +14,17 @@ composer require eliabrian/laravel-jikan
 
 All of the models implemetation are pretty much the same (Anime, Manga, Characters, etc).
 
+### Searching
+```php
+use Eliabrian\LaravelJikan\Facades\Anime;
+
+$results = Anime::search([
+    'q' => 'Demon Slayer',
+    'type' => 'tv',
+    'sfw' => true,
+    'limit' => 1,
+])->get();
+```
 ### Get by ID
 
 ```php
@@ -28,11 +39,27 @@ use Eliabrian\LaravelJikan\Facades\Anime;
 $animeCharacters = Anime::id(20)->type('characters')->get();
 $animePictures = Anime::id(20)->type('pictures')->get();
 ```
-> **_NOTE:_** Type for different model might be differ. For more types you can look it up in [Jikan Docs](https://docs.api.jikan.moe/).
+> Type for different model might be differ. For more types you can look it up in [Jikan Docs](https://docs.api.jikan.moe/).
+
 ### Get random
 ```php
-use Eliabrian\LaravelJikan\Facades\Random;
+use Eliabrian\LaravelJikan\Facades\Anime;
+use Eliabrian\LaravelJikan\Facades\Manga;
 
-$randomAnimes = Random::anime()->get();
-$randomAnimes = Random::manga()->get();
+$randomAnimes = Anime::random()->get();
+$randomMangas = Manga::random()->get();
+```
+
+### Get Top
+```php
+use Eliabrian\LaravelJikan\Facade\Anime;
+
+$topAnimes = Anime::top()->get();
+
+// You can also add query parameters into it:
+$topUpcomingAnimes = Anime::top([
+    'type' => 'tv',
+    'filter' => 'upcoming',
+    'limit' => '5',
+])->get();
 ```
